@@ -20,8 +20,13 @@ class ListInput(forms.CharField):
             self.minimum = kwargs.pop('minimum')
         if 'maximum' in kwargs:
             self.maximum = kwargs.pop('maximum')
-        self.required = kwargs['required']
+        self.required = kwargs.get('required', True)
         super().__init__(*args, **kwargs)
+
+    def prepare_value(self, value):
+        if isinstance(value, list):
+            return json.dumps(value)
+        return value
 
     def validate(self, value):
         super().validate(value)
@@ -37,7 +42,3 @@ class ListInput(forms.CharField):
         if self.maximum > 0 and len(json_value) > self.maximum:
             raise ValidationError(
                 'No more than {} values can be supplied'.format(self.maximum))
-
-    def clean(self, value):
-        value = super().clean(value)
-        return json.loads(value)
