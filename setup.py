@@ -9,4 +9,8 @@ setup(
     author='Luke Shiner',
     author_email='luke@lukeshiner.com',
     packages=find_packages(),
+    include_package_data=True,
+    data_files=[('list_input', [
+        'list_input/static/list_input/scripts/list_widget.js',
+        'list_input/templates/list_input/list_widget.html'])]
     )
