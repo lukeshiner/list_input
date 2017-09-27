@@ -37,9 +37,6 @@ class ListInput(forms.CharField):
         return python_value
 
     def validate(self, value):
-        super().validate(value)
-        if not isinstance(value, list):
-            raise ValidationError('Not valid JSON list.')
         if self.minimum > 0 and len(value) < self.minimum:
             raise ValidationError(
                 'At least {} value(s) required'.format(self.minimum))
