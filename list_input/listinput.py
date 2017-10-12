@@ -20,6 +20,8 @@ class ListInput(forms.CharField):
             self.minimum = kwargs.pop('minimum')
         if 'maximum' in kwargs:
             self.maximum = kwargs.pop('maximum')
+        self.widget.maximum = self.maximum
+        self.widget.minimum = self.minimum
         self.required = kwargs.get('required', True)
         super().__init__(*args, **kwargs)
 

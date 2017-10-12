@@ -5,13 +5,15 @@ function get_guid() {
     });
 }
 
-var MakeList = function(parent, name, target, separator) {
+var MakeList = function(parent, name, target, separator, minimum, maximum) {
     var div = $('<div>', {"class": 'listinput'});
     div.append('<label>' + name + '</label>');
     parent.append(div);
 
     var self = {
         inputs: {},
+        minimum: minimum,
+        maximum: maximum,
         update: function() {
             $.each(self.inputs, function(index, input) {
                 var input_value = input.get_value();
@@ -25,6 +27,11 @@ var MakeList = function(parent, name, target, separator) {
             target.val(json);
         },
         add: function(value) {
+            if (self.maximum > 0) {
+                if (self.get_list().length === self.maximum) {
+                    return
+                }
+            }
             var value = value || "";
             var guid = get_guid();
             var new_input = ListInput(div);

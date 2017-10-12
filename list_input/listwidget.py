@@ -7,6 +7,8 @@ from django.template.loader import render_to_string
 class ListWidget(forms.TextInput):
 
     list_separator = ';'
+    maximum = 0
+    minimum = 0
 
     def render(self, name, value, attrs):
         flat_attrs = flatatt(attrs)
@@ -14,5 +16,6 @@ class ListWidget(forms.TextInput):
             'list_input/list_widget.html',
             {
                 'id': attrs['id'], 'attrs': flat_attrs, 'value': value,
-                'name': name})
+                'name': name, 'minimum': self.minimum,
+                'maximum': self.maximum})
         return mark_safe(html)

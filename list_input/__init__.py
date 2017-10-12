@@ -1,1 +1,2 @@
-from . listinput import ListInput  # noqa
+from . listinput import ListInput  # NOQA
+from . listwidget import ListWidget  # NOQA
