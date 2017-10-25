@@ -1,7 +1,4 @@
 from django import forms
-from django.forms.utils import flatatt
-from django.utils.safestring import mark_safe
-from django.template.loader import render_to_string
 
 
 class ListWidget(forms.TextInput):
@@ -10,12 +7,11 @@ class ListWidget(forms.TextInput):
     maximum = 0
     minimum = 0
 
-    def render(self, name, value, attrs):
-        flat_attrs = flatatt(attrs)
-        html = render_to_string(
-            'list_input/list_widget.html',
-            {
-                'id': attrs['id'], 'attrs': flat_attrs, 'value': value,
-                'name': name, 'minimum': self.minimum,
-                'maximum': self.maximum})
-        return mark_safe(html)
+    template_name = 'list_input/list_widget.html'
+
+    def get_context(self, name, value, attrs):
+        context = super().get_context(name, value, attrs)
+        context['widget']['separator'] = self.list_separator
+        context['widget']['maximum'] = self.maximum
+        context['widget']['minimum'] = self.minimum
+        return context

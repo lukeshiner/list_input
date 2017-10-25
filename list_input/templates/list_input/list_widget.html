@@ -1,12 +1,12 @@
 
-<div id="div_{{ id }}">
-    <input {{ flat_attrs }} id="{{ id }}" name="{{ name }}" value="{% if value %}{{ value }}{% endif %}" />
+<div id="div_{{ widget.attrs.id }}">
+    <input type="{{ widget.type }}" name="{{ widget.name }}"{% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %}{% include "django/forms/widgets/attrs.html" %} />
     <script type="text/javascript">
         $( document ).ready(function() {
-            var input = $('#{{ id }}');
+            var input = $('#{{ widget.attrs.id }}');
             input.hide();
-            var div = $("#div_{{ id }}");
-            var list = MakeList(div, "{{ label }}", input, '{{ separtor }}', {{ minimum }}, {{ maximum }});
+            var div = $("#div_{{ widget.attrs.id }}");
+            var list = MakeList(div, "{{ widget.name }}", input, '{{ widget.separator }}', {{ widget.minimum }}, {{ widget.maximum }});
         });
     </script>
 </div>

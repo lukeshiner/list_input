@@ -7,7 +7,6 @@ function get_guid() {
 
 var MakeList = function(parent, name, target, separator, minimum, maximum) {
     var div = $('<div>', {"class": 'listinput'});
-    div.append('<label>' + name + '</label>');
     parent.append(div);
 
     var self = {
@@ -59,16 +58,13 @@ var MakeList = function(parent, name, target, separator, minimum, maximum) {
         }
     };
     self.add();
-    console.log(target);
     var initial_json = target.val();
     if (initial_json !== "") {
         var initial_list = JSON.parse(target.val());
         if (initial_list.length > 0) {
             for (var i=0; i<initial_list.length; i++) {
-                console.log(initial_list[i]);
                 var input = div.find('.list_input_input:last');
                 input.val(initial_list[i]);
-                console.log(input);
                 self.add();
             }
         }
@@ -103,7 +99,6 @@ var ListInput = function(parent) {
     });
 
     self.remove = function(){
-        console.log('Remove');
         self.div.detach();
         self.div.css('background', 'red');
         input.remove();
