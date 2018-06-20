@@ -1,16 +1,36 @@
 #!/usr/bin/env python
+"""Setup for ListInput."""
 
-from setuptools import setup, find_packages
+import os
 
-setup(
-    name='list_input',
-    version='0.0.1',
-    description='Django Form Field for lists',
-    author='Luke Shiner',
-    author_email='luke@lukeshiner.com',
-    packages=find_packages(),
+import setuptools
+
+NAME = 'list_input'
+
+with open("README.rst", "r") as readme:
+    long_description = readme.read()
+
+here = os.path.abspath(os.path.dirname(__file__))
+
+about = {}
+with open(os.path.join(here, NAME, '__version__.py'), 'r') as f:
+    exec(f.read(), about)
+
+setuptools.setup(
+    name=about['__title__'],
+    version=about['__version__'],
+    description=about['__description__'],
+    long_description=long_description,
+    url=about['__url__'],
+    author=about['__author__'],
+    author_email=about['__author_email__'],
+    install_requires=['django>=2.0'],
+    packages=setuptools.find_packages(),
     include_package_data=True,
-    data_files=[('list_input', [
-        'list_input/static/list_input/scripts/list_widget.js',
-        'list_input/templates/list_input/list_widget.html'])]
-    )
+    data_files=[
+        (
+            'list_input', [
+                'list_input/static/list_input/scripts/list_widget.js',
+                'list_input/templates/list_input/list_widget.html'
+            ])
+    ])
