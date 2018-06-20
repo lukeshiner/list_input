@@ -24,7 +24,7 @@ setuptools.setup(
     url=about['__url__'],
     author=about['__author__'],
     author_email=about['__author_email__'],
-    install_requires=['django>=2.0'],
+    install_requires=['django>=1.11'],
     packages=setuptools.find_packages(),
     include_package_data=True,
     data_files=[
