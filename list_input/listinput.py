@@ -37,12 +37,14 @@ class ListInput(forms.CharField):
         if 'widget' in kwargs:
             self.widget = kwargs.pop('widget')
         if 'minimum' in kwargs:
-            self.minimum = kwargs.pop('minimum')
+            self.minimum = kwargs.pop('minimum') or 0
         if 'maximum' in kwargs:
-            self.maximum = kwargs.pop('maximum')
+            self.maximum = kwargs.pop('maximum') or 0
+        self.required = kwargs.get('required', True)
+        if self.minimum == 0 and self.required:
+            self.minimum = 1
         self.widget.maximum = self.maximum
         self.widget.minimum = self.minimum
-        self.required = kwargs.get('required', True)
         super().__init__(*args, **kwargs)
 
     def prepare_value(self, value):

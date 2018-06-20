@@ -21,7 +21,7 @@ def test_below_minimum_raises():
 
 
 def test_no_minimum_does_not_raise():
-    ListInput(minimum=0).validate([])
+    ListInput(minimum=0, required=False).validate([])
 
 
 def test_above_maximum_raises():
