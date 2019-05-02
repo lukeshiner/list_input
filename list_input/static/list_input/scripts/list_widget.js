@@ -74,11 +74,11 @@ var MakeList = function(parent, name, target, separator, minimum, maximum) {
 };
 
 var ListInput = function(parent) {
-    var div = $('<div class="list_input"></div>');
-    var input = $('<input type="text" class="list_input_input">');
+    var div = $('<div class="list_input InputAddOn"></div>');
+    var input = $('<input type="text" class="list_input_input InputAddOn-field">');
     parent.append(div);
     div.append(input);
-    var remove_button = $('<button>X</button>');
+    var remove_button = $('<button class="remove InputAddOn-item">&#x274C;</button>');
     div.append(remove_button);
     var self = {
         div: div,
