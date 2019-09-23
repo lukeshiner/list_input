@@ -40,8 +40,8 @@ class ListInput(forms.CharField):
             self.minimum = kwargs.pop("minimum") or self.__class__.minimum
         if "maximum" in kwargs:
             self.maximum = kwargs.pop("maximum") or self.__class__.maximum
-        self.required = kwargs.get("required", True)
-        if self.minimum == 0 and self.required:
+        self.required = kwargs.get("required", self.required)
+        if self.minimum == 0 and self.required is True:
             self.minimum = 1
         self.widget.maximum = self.maximum
         self.widget.minimum = self.minimum
@@ -56,10 +56,12 @@ class ListInput(forms.CharField):
     def to_python(self, value):
         """Return value as a list of strings."""
         value = super().to_python(value)
+        if not value:
+            return []
         try:
             python_value = json.loads(value)
         except ValueError:
-            raise ValidationError("Not valid JSON.")
+            raise ValidationError('"{}" is not valid JSON.'.format(value))
         return python_value
 
     def validate(self, value):
@@ -77,4 +79,3 @@ class ListInput(forms.CharField):
             raise ValidationError(
                 "No more than {} values can be supplied".format(self.maximum)
             )
-        return super().validate(value)
