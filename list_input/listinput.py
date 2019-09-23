@@ -34,13 +34,13 @@ class ListInput(forms.CharField):
                 appear. If a for is submitted with this value exceeded it will
                 raise a ValidationError.
         """
-        if 'widget' in kwargs:
-            self.widget = kwargs.pop('widget')
-        if 'minimum' in kwargs:
-            self.minimum = kwargs.pop('minimum') or 0
-        if 'maximum' in kwargs:
-            self.maximum = kwargs.pop('maximum') or 0
-        self.required = kwargs.get('required', True)
+        if "widget" in kwargs:
+            self.widget = kwargs.pop("widget")
+        if "minimum" in kwargs:
+            self.minimum = kwargs.pop("minimum") or self.__class__.minimum
+        if "maximum" in kwargs:
+            self.maximum = kwargs.pop("maximum") or self.__class__.maximum
+        self.required = kwargs.get("required", True)
         if self.minimum == 0 and self.required:
             self.minimum = 1
         self.widget.maximum = self.maximum
@@ -59,7 +59,7 @@ class ListInput(forms.CharField):
         try:
             python_value = json.loads(value)
         except ValueError:
-            raise ValidationError('Not valid JSON.')
+            raise ValidationError("Not valid JSON.")
         return python_value
 
     def validate(self, value):
@@ -72,8 +72,9 @@ class ListInput(forms.CharField):
 
         """
         if self.minimum > 0 and len(value) < self.minimum:
-            raise ValidationError(
-                'At least {} value(s) required'.format(self.minimum))
+            raise ValidationError("At least {} value(s) required".format(self.minimum))
         if self.maximum > 0 and len(value) > self.maximum:
             raise ValidationError(
-                'No more than {} values can be supplied'.format(self.maximum))
+                "No more than {} values can be supplied".format(self.maximum)
+            )
+        return super().validate(value)
