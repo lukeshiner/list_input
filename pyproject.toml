@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "list_input"
+version = "0.1.0"
+description = "Enter multiple values in a Django form field."
+authors = ["Luke Shiner <luke@lukeshiner.com>"]
+license = "MIT"
+readme = "README.rst"
+homepage = "https://github.com/lukeshiner/list_input"
+repository = "https://github.com/lukeshiner/list_input"
+
+[tool.coverage.run]
+branch = true
+omit = ["tests/*",]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+django = "^3.0.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.3.5"
+pytest-cov = "^2.8.1"
+coveralls = "^1.10.0"
+flake8 = "^3.7.9"
+black = "^19.10b0"
+
+
+[build-system]
+requires = ["poetry>=0.12",]
+build-backend = "poetry.masonry.api"
+
