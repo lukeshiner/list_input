@@ -2,6 +2,7 @@ import json
 
 import pytest
 from django.core.exceptions import ValidationError
+
 from list_input import ListInput
 
 
