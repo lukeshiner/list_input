@@ -13,8 +13,8 @@ branch = true
 omit = ["tests/*",]
 
 [tool.poetry.dependencies]
-python = "^3.6.2,<4.0"
-django = ">3.0"
+python = ">=3.7,<4.0"
+django = ">=2.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.0.0"
@@ -24,6 +24,7 @@ flake8 = "^4.0.1"
 black = "^21.12b0"
 isort = "^5.10.1"
 flake8-docstrings = "^1.6.0"
+tox = "^3.24.4"
 
 
 [build-system]
