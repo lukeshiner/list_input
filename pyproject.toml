@@ -24,7 +24,7 @@ flake8 = "^4.0.1"
 black = "^21.12b0"
 isort = "^5.10.1"
 flake8-docstrings = "^1.6.0"
-tox = "^3.24.4"
+tox = "^3.24.5"
 
 
 [build-system]
